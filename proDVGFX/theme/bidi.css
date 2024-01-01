@@ -587,7 +587,6 @@ li.breadcrumbs span:first-child > a {
 	border-width: 0 1px 0 0;
 	float: left;
 	width: auto;
-/*	text-align: right; */
 }
 
 .rtl .pm .postprofile {
@@ -792,15 +791,6 @@ li.breadcrumbs span:first-child > a {
 /* Avatar gallery */
 .rtl .gallery label {
 	float: right;
-}
-
-/* Responsive *CP navigation
-----------------------------------------*/
-@media only screen and (max-width: 900px), only screen and (max-device-width: 900px)
-{
-	.rtl .cp-menu, .rtl .navigation, .rtl .cp-main {
-		float: none;
-	}
 }
 
 /**
@@ -1091,5 +1081,12 @@ li.breadcrumbs span:first-child > a {
 		float: none;
 		text-align: center;
 		margin-bottom: 5px;
+	}
+}
+
+@media (min-width: 701px) {
+	.rtl .postbody {
+		margin-right: 0;
+		margin-left: 16px;
 	}
 }

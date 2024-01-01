@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 {META}
-<title><!-- IF UNREAD_NOTIFICATIONS_COUNT -->({UNREAD_NOTIFICATIONS_COUNT}) <!-- ENDIF --><!-- IF not S_VIEWTOPIC and not S_VIEWFORUM -->{SITENAME} &raquo; <!-- ENDIF --><!-- IF S_IN_MCP -->{L_MCP} &raquo; <!-- ELSEIF S_IN_UCP -->{L_UCP} &raquo; <!-- ENDIF -->{PAGE_TITLE}<!-- IF S_VIEWTOPIC or S_VIEWFORUM --> &raquo; {SITENAME}<!-- ENDIF --></title>
+<title><!-- IF UNREAD_NOTIFICATIONS_COUNT -->({UNREAD_NOTIFICATIONS_COUNT}) <!-- ENDIF --><!-- IF not S_VIEWTOPIC and not S_VIEWFORUM -->{SITENAME} - <!-- ENDIF --><!-- IF S_IN_MCP -->{L_MCP} - <!-- ELSEIF S_IN_UCP -->{L_UCP} - <!-- ENDIF -->{PAGE_TITLE}<!-- IF S_VIEWTOPIC or S_VIEWFORUM --> - {SITENAME}<!-- ENDIF --></title>
 
 <!-- IF S_ENABLE_FEEDS -->
 	<!-- IF S_ENABLE_FEEDS_OVERALL --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {SITENAME}" href="{{ path('phpbb_feed_index') }}"><!-- ENDIF -->
@@ -26,7 +26,7 @@
 	phpBB style name: DVGFX
 	Based on style:   prosilver (this is the default phpBB3 style)
 	Original author:  Tom Beddard ( http://www.subBlue.com/ )
-	Modified by:      Prosk8er ( http://gotskillslounge.com/ )
+	Modified by:      Prosk8er ( https://gotskillslounge.com/ )
 -->
 
 <!-- IF S_ALLOW_CDN -->
@@ -39,7 +39,7 @@
 
 	(function(d) {
 		var wf = d.createElement('script'), s = d.scripts[0];
-		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+		wf.src = 'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js';
 		wf.async = true;
 		s.parentNode.insertBefore(wf, s);
 	})(document);
@@ -83,17 +83,35 @@
 		<!-- EVENT overall_header_headerbar_before -->
 			<div class="inner">
 
-			<div id="site-description">
-				<!--<a id="logo" class="logo" href="<!-- IF U_SITE_HOME -->{U_SITE_HOME}<!-- ELSE -->{U_INDEX}<!-- ENDIF -->" title="<!-- IF U_SITE_HOME -->{L_SITE_HOME}<!-- ELSE -->{L_INDEX}<!-- ENDIF -->">{SITE_LOGO_IMG}</a>
+			<div id="site-description" class="site-description">
+		<a id="logo" class="logo" href="{% if U_SITE_HOME %}{{ U_SITE_HOME }}{% else %}{{ U_INDEX }}{% endif %}" title="{% if U_SITE_HOME %}{{ L_SITE_HOME }}{% else %}{{ L_INDEX }}{% endif %}">
+					<span class="site_logo"></span>
+				</a>
 				<h1>{SITENAME}</h1>
-				<p>{SITE_DESCRIPTION}</p>-->
+				<p>{SITE_DESCRIPTION}</p>
 				<p class="skiplink"><a href="#start_here">{L_SKIP}</a></p>
 			</div>
 
 			<!-- EVENT overall_header_searchbox_before -->
+			<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
+			<div id="search-box" class="search-box search-header" role="search">
+				<form action="{U_SEARCH}" method="get" id="search">
+				<fieldset>
+					<input name="keywords" id="keywords" type="search" maxlength="128" title="{L_SEARCH_KEYWORDS}" class="inputbox search tiny" size="20" value="{SEARCH_WORDS}" placeholder="{L_SEARCH_MINI}" />
+					<button class="button button-search" type="submit" title="{L_SEARCH}">
+						<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH}</span>
+					</button>
+					<a href="{U_SEARCH}" class="button button-search-end" title="{L_SEARCH_ADV}">
+						<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">{L_SEARCH_ADV}</span>
+					</a>
+					{S_SEARCH_HIDDEN_FIELDS}
+				</fieldset>
+				</form>
 			</div>
+			<!-- ENDIF -->
 			<!-- EVENT overall_header_searchbox_after -->
 
+			</div>
 			<!-- EVENT overall_header_headerbar_after -->
 		</div>
 		<!-- EVENT overall_header_navbar_before -->
